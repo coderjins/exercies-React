@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUp.scss";
 import Button from "../../components/Button/Button";
 
 const SignUp = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return email.match(emailRegex) != null;
+  };
+
+  const inputUserEmail = (event) => {
+    setUserEmail(event.target.value);
+    setIsEmailValid(validateEmail(event.target.value));
+  };
+
+  const inputPassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const inputConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
+  const isPasswordValid = password.length >= 10 && password === confirmPassword;
+
+  const loginClick = () => {
+    alert("회원가입 시도");
+  };
+
   const goBack = () => {
-    window.history.back(); // 브라우저의 이전 페이지로 이동
+    window.history.back();
   };
 
   return (
@@ -14,7 +43,7 @@ const SignUp = () => {
           className="goBackButton"
           alt="back_button"
           src="images/Back_arrow.png"
-          onClick={goBack} // 이벤트 핸들러 추가
+          onClick={goBack}
         />
         <span className="goBack" onClick={goBack}>
           뒤로
@@ -29,16 +58,25 @@ const SignUp = () => {
           </label>
 
           <div className="list">
-            <input className="email" placeholder="이메일" />
+            <input
+              className="email"
+              placeholder="이메일"
+              onChange={inputUserEmail}
+              value={userEmail}
+            />
             <input
               className="password"
               placeholder="비밀번호"
               type="password"
+              onChange={inputPassword}
+              value={password}
             />
             <input
               className="checkPassword"
               placeholder="비밀번호 확인"
               type="password"
+              onChange={inputConfirmPassword}
+              value={confirmPassword}
             />
           </div>
         </div>
@@ -52,7 +90,11 @@ const SignUp = () => {
       </div>
 
       <div className="action">
-        <Button title="회원 가입" />
+        <Button
+          onClick={loginClick}
+          title="로그인"
+          disabled={!isEmailValid || !isPasswordValid}
+        />
       </div>
     </div>
   );
