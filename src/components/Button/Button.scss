@@ -7,11 +7,18 @@
   font-size: 18px;
   font-weight: 800;
   cursor: pointer;
-  &.disabled {
+  background: #2d71f7;
+
+  &:disabled {
     background: grey;
   }
-  &:not(.disabled) {
-    background: #2d71f7;
-  }
+}
+
+.smallButton {
+  height: 56px;
+  width: 120px;
+  padding: 0px 34px;
+  display: flex;
+  align-items: center;
 }
 //rafce

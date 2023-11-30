@@ -5,21 +5,16 @@ import Button from "../../components/Button/Button";
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return email.match(emailRegex) != null;
-  };
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   const inputUserEmail = (event) => {
     setUserEmail(event.target.value);
-    setIsEmailValid(validateEmail(event.target.value));
   };
 
   const inputPassword = (event) => {
     setPassword(event.target.value);
   };
+  const isEmailValid = userEmail.match(emailRegex) !== null;
   const isPasswordValid = password.length >= 10;
 
   const loginClick = () => {
@@ -41,20 +36,19 @@ const Login = () => {
           className="userInput"
           placeholder="이메일"
           onChange={inputUserEmail}
-          value={userEmail}
         />
         <input
           className="userInput"
           placeholder="비밀번호"
           type="password"
           onChange={inputPassword}
-          value={password}
         />
         <Button
           onClick={loginClick}
-          title="로그인"
           disabled={!isEmailValid || !isPasswordValid}
-        />
+        >
+          로그인
+        </Button>
         <div className="signUpfindPw">
           <span className="signUp">회원가입</span>
           <span className="separator">|</span>

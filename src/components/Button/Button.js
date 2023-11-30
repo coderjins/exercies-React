@@ -1,13 +1,14 @@
 import React from "react";
 import "./Button.scss";
 
-const Button = ({ title, onClick, disabled }) => {
-  const buttonTitle = title ? title : "button";
-  const buttonState = `button ${disabled ? "disabled" : ""}`;
-
+const Button = ({ onClick, disabled, children, className }) => {
   return (
-    <button onClick={onClick} className={buttonState} disabled={disabled}>
-      {buttonTitle}
+    <button
+      onClick={onClick}
+      className={`button ${className}`}
+      disabled={disabled}
+    >
+      {children}
     </button>
   );
 };

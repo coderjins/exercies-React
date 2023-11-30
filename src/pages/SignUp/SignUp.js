@@ -6,16 +6,10 @@ const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return email.match(emailRegex) != null;
-  };
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   const inputUserEmail = (event) => {
     setUserEmail(event.target.value);
-    setIsEmailValid(validateEmail(event.target.value));
   };
 
   const inputPassword = (event) => {
@@ -25,7 +19,7 @@ const SignUp = () => {
   const inputConfirmPassword = (event) => {
     setConfirmPassword(event.target.value);
   };
-
+  const isEmailValid = userEmail.match(emailRegex) !== null;
   const isPasswordValid = password.length >= 10 && password === confirmPassword;
 
   const loginClick = () => {
@@ -92,9 +86,10 @@ const SignUp = () => {
       <div className="action">
         <Button
           onClick={loginClick}
-          title="로그인"
           disabled={!isEmailValid || !isPasswordValid}
-        />
+        >
+          회원 가입
+        </Button>
       </div>
     </div>
   );
